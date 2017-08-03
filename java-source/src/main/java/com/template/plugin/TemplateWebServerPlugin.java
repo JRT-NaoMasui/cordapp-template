@@ -4,15 +4,14 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.template.api.TemplateApi;
 import net.corda.core.messaging.CordaRPCOps;
-import net.corda.core.node.CordaPluginRegistry;
-import net.corda.core.serialization.SerializationCustomization;
 import net.corda.webserver.services.WebServerPluginRegistry;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-public class TemplatePlugin extends CordaPluginRegistry implements WebServerPluginRegistry {
+public class TemplateWebServerPlugin implements WebServerPluginRegistry {
     /**
      * A list of classes that expose web APIs.
      */
@@ -27,14 +26,15 @@ public class TemplatePlugin extends CordaPluginRegistry implements WebServerPlug
             "template", getClass().getClassLoader().getResource("templateWeb").toExternalForm()
     );
 
-    /**
-     * Whitelisting the required types for serialisation by the Corda node.
-     */
+    @NotNull
     @Override
-    public boolean customizeSerialization(SerializationCustomization custom) {
-        return true;
+    public List<Function<CordaRPCOps, ?>> getWebApis() {
+        return webApis;
     }
 
-    @Override public List<Function<CordaRPCOps, ?>> getWebApis() { return webApis; }
-    @Override public Map<String, String> getStaticServeDirs() { return staticServeDirs; }
+    @NotNull
+    @Override
+    public Map<String, String> getStaticServeDirs() {
+        return staticServeDirs;
+    }
 }

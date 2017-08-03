@@ -2,12 +2,10 @@ package com.template.plugin
 
 import com.template.api.TemplateApi
 import net.corda.core.messaging.CordaRPCOps
-import net.corda.core.node.CordaPluginRegistry
-import net.corda.core.serialization.SerializationCustomization
 import net.corda.webserver.services.WebServerPluginRegistry
 import java.util.function.Function
 
-class TemplatePlugin : CordaPluginRegistry(), WebServerPluginRegistry {
+class TemplateWebServerPlugin : WebServerPluginRegistry {
     /**
      * A list of classes that expose web APIs.
      */
@@ -21,11 +19,4 @@ class TemplatePlugin : CordaPluginRegistry(), WebServerPluginRegistry {
             // This will serve the templateWeb directory in resources to /web/template
             "template" to javaClass.classLoader.getResource("templateWeb").toExternalForm()
     )
-
-    /**
-     * Whitelisting the required types for serialisation by the Corda node.
-     */
-    override fun customizeSerialization(custom: SerializationCustomization): Boolean {
-        return true
-    }
 }
