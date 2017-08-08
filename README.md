@@ -1,5 +1,11 @@
 ![Corda](https://www.corda.net/wp-content/uploads/2016/11/fg005_corda_b.png)
 
+# DEPRECATED
+
+Please use the [Kotlin CorDapp Template](https://github.com/corda/cordapp-template-kotlin) or the 
+[Java Cordapp Template](https://github.com/corda/cordapp-template-java). This version has been deprecated as of M13
+and will not receive newer releases (M14 and beyond). 
+
 # CorDapp Template
 
 Welcome to the CorDapp template. The CorDapp template is a stubbed-out CorDapp 
